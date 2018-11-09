@@ -93,10 +93,10 @@ router.route('/items/:item_id')
                  res.send(err);
             }
            item.name = req.body.name;  // update the bears info
-         item.price = req.body.price;  
-         item.quantity = req.body.quantity;
-         item.tax = req.body.tax;
-         item.id = req.body._id;
+           item.price = req.body.price;  
+           item.quantity = req.body.quantity;
+           item.tax = req.body.tax;
+       
 
             // save the bear
             item.save(function(err) {
