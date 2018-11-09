@@ -78,7 +78,7 @@ function addParka(){
     let price_field = document.getElementById("price-field").value;
     let quantity_field = document.getElementById("quantity-field").value;
     let tax_field = document.getElementById("tax-field").value;
-     if (!name_field || !price_field || !quantity_field || !tax_field){
+     if (!name_field || !price_field || !quantity_field){
        alert("Error, please enter the required fields!");
        return;
    }
