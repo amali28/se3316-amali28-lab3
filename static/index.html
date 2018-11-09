@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UFT-8">
+        <title>PARKA STORE</title>
+    </head>
+    <body>
+        
+        <h1>PARKA STORE</h1>
+        <div id = "Search">
+            <h2>Search</h2>
+              <input id="name" type="text" name="name"><br>
+               <button onclick="">Search</button>
+            </form>
+        </div>
+        <div id = "Get">
+        <h2>List of Parkas</h2>
+          <table>
+        
+            <button onclick="retriveData()">Get Parkas</button>
+            
+             <tbody>
+                 
+             </tbody>
+            </table>
+        </div>
+        <div id = "Create">
+            <h2>Add a new parka to the store</h2>
+            <form>
+              Name<br>
+              <input id="name-field" type="text" name="name"><br>
+              Price<br>
+             <input id="price-field" type="text" name="price"><br>
+              Quantity<br>
+              <input id="quantity-field" type="text" name="quantity"><br>
+              Tax <br>
+              <input id="tax-field" type="text" name="tax"><br>
+            </form>
+            <button onclick="addParka()">Create</button>
+            </div>
+            <script src="script.js"></script>
+    </body>
+</html>
