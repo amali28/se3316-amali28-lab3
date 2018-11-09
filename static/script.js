@@ -171,4 +171,23 @@ function updateParkaInformation(itemNumber){
     });
 }
 
-
+function findItem(){
+    let itemID = document.getElementById("searchField").value;
+    getParkaData("https://se3316-amali28-lab3-amali28.c9users.io/api/items/" + itemID, function(response){
+        
+        document.querySelector("tbody").innerHTML = ""
+        
+        response.forEach(function(parka){
+       
+        displayTableAttributes();
+        document.querySelector("tbody").innerHTML += "<tr>" + 
+        "<td>" + parka.name +"</td>"+
+        "<td>" + parka.price +"</td>"+
+        "<td>" + parka._id +"</td>"+
+        "<td>" + parka.quantity + "</td>"+
+        "<td>" + parka.tax +"</td>"
+        + "</tr>"
+        })
+    }
+    );
+}
