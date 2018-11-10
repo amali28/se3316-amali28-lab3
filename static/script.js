@@ -165,20 +165,20 @@ function updateParkaInformation(itemNumber){
     
        putData("https://se3316-amali28-lab3-amali28.c9users.io/api/items/"+ parkaID, updatedParka, function(response){
             
-            if(confirm("Are you sure you would like to update this item")){
+            if(confirm("Are you sure you would like to update this item?")){
                 retriveData();
             }
+            alert(existingName + " has been successfully updated");
     });
 }
 
 function findItem(){
     let itemID = document.getElementById("searchField").value;
-    getParkaData("https://se3316-amali28-lab3-amali28.c9users.io/api/items/" + itemID, function(response){
+    getParkaData(" https://se3316-amali28-lab3-amali28.c9users.io/api/items/" + itemID, function(response){
         
         document.querySelector("tbody").innerHTML = ""
         
         response.forEach(function(parka){
-       
         displayTableAttributes();
         document.querySelector("tbody").innerHTML += "<tr>" + 
         "<td>" + parka.name +"</td>"+
