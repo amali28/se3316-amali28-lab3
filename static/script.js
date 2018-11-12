@@ -23,7 +23,7 @@ function getParkaData(url = ``,myCallBack) {
 function findItem(){
     let itemID = document.getElementById("searchField").value;
     
-   
+    itemID = sanitarizer(itemID);
    getParkaData("https://se3316-amali28-lab3-amali28.c9users.io/api/items/" + itemID, function(response){
         
         document.querySelector("tbody").innerHTML = ""
@@ -98,15 +98,24 @@ function addParka(){
     let price_field = document.getElementById("price-field").value;
     let quantity_field = document.getElementById("quantity-field").value;
     let tax_field = document.getElementById("tax-field").value;
+    
+    name_field = sanitarizer(name_field);
+    price_field = sanitarizer(price_field);
+    quantity_field = sanitarizer(quantity_field);
+    tax_field = sanitarizer(tax_field);
+    
+    
      if (!name_field || !price_field || !quantity_field){
        alert("Error, please enter the required fields!");
        return;
+   } else {
+       alert(name_field + " has successfully been added to the database.");
    }
 let newParka= {name: name_field, price: price_field, quantity: quantity_field, tax: tax_field};
     postData("https://se3316-amali28-lab3-amali28.c9users.io/api/items", newParka, function(response){
+    
     });
     
-// regenerate table
     retriveData();
 }
 
@@ -118,6 +127,7 @@ if (confirm("Are you sure you would like to delete this item?")){
     let parkaID = document.getElementById("parka._id" + tableRow).innerHTML;
      deleteParka("https://se3316-amali28-lab3-amali28.c9users.io/api/items/"+parkaID, function(response){
         console.log(response);
+        alert("Item has successfully been deleted.");
     });
     }
     
@@ -128,6 +138,7 @@ if (confirm("Are you sure you would like to delete this item?")){
 
 function retriveData(){
 
+    setInterval(function() {
     getParkaData("https://se3316-amali28-lab3-amali28.c9users.io/api/items", function(response){
         
         document.querySelector("tbody").innerHTML = ""
@@ -150,8 +161,8 @@ function retriveData(){
         })
     }
     );
+    }, 2000);
 }
-
 
 function putData(url = ``, data = {}, myCallBack) {
   // Default options are marked with *
@@ -172,7 +183,6 @@ function putData(url = ``, data = {}, myCallBack) {
 }
 function updateParkaInformation(itemNumber){
 
-   
     let tableRow = String(itemNumber);
     let parkaID = document.getElementById("parka._id" + tableRow).innerHTML;
     let existingName = document.getElementById("parka.name"+tableRow).innerHTML;
@@ -180,6 +190,9 @@ function updateParkaInformation(itemNumber){
     let updatedQuantity = document.getElementById("parka.quantity"+tableRow).value;
     let updatedTax = document.getElementById("parka.tax"+tableRow).value;
    
+    updatedQuantity = sanitarizer(updatedQuantity);
+    updatedTax = sanitarizer(updatedTax);
+       
     
     let updatedParka= {name: existingName, price: existingPrice, quantity: updatedQuantity, tax: updatedTax};
     
@@ -187,9 +200,23 @@ function updateParkaInformation(itemNumber){
             
             if(confirm("Are you sure you would like to update this item?")){
                 retriveData();
+                 alert(existingName + " has been successfully updated");
             }
-            alert(existingName + " has been successfully updated");
+           
     });
+}
+// sanitarizer
+function sanitarizer(string) {
+  const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#x27;',
+      "/": '&#x2F;',
+  };
+  const reg = /[&<>"'/]/ig;
+  return string.replace(reg, (match)=>(map[match]));
 }
 
 

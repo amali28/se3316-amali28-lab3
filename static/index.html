@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="global.css">
         <meta charset="UFT-8">
         <title>PARKA STORE</title>
     </head>
-    <body>
-        
+    <body bgcolor="#ebf4ec">
         <h1>PARKA STORE</h1>
         <div id = "Search">
             <h2>Search</h2>
             <table>
-              <input id="searchField" type="text" placeholder="Enter a parka name"><br>
+              <input id="searchField" type="text" placeholder="Enter a parka name"><br><br>
                <button onclick="findItem()">Search</button>
                <button onclick="retriveData()">Get All Parkas</button>
                <tbody>
@@ -29,6 +29,7 @@
               Tax <br>
               <input id="tax-field" type="text" value = 0.13><br>
             </form>
+            <br>
             <button id="add-parka" onclick="addParka()">Create</button>
             </div>
             <script src="script.js"></script>
