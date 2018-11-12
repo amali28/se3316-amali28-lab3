@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="global.css">
         <meta charset="UFT-8">
         <title>PARKA STORE</title>
     </head>
@@ -9,13 +8,19 @@
         <h1>PARKA STORE</h1>
         <div id = "Search">
             <h2>Search</h2>
-            <table>
-              <input id="searchField" type="text" placeholder="Enter a parka name"><br><br>
+            <table id = "searchTable">
+              <input id="searchField" type="text" placeholder="Enter a parka ID name"><br><br>
                <button onclick="findItem()">Search</button>
-               <button onclick="retriveData()">Get All Parkas</button>
                <tbody>
                </tbody>
              </table>
+        </div>
+        
+        <div id = "Get All">
+            <h2>Get All</h2>
+            <table id="allTable">
+                <button onclick="retriveData()">Get All Parkas</button>
+            </table>
         </div>
         <div id = "Create">
             <h2>Add a Parka</h2>

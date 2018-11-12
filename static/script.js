@@ -1,4 +1,4 @@
-function getParkaData(url = ``,myCallBack) {
+function getParkaData(url = ``, myCallBack) {
   // Default options are marked with *
     return fetch(url, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
@@ -23,13 +23,12 @@ function getParkaData(url = ``,myCallBack) {
 function findItem(){
     let itemID = document.getElementById("searchField").value;
     
-    itemID = sanitarizer(itemID);
+   itemID = sanitarizer(itemID);
    getParkaData("https://se3316-amali28-lab3-amali28.c9users.io/api/items/" + itemID, function(response){
         
-        document.querySelector("tbody").innerHTML = ""
-        
-        displayTableAttributes();
-        document.querySelector("tbody").innerHTML +=
+        document.getElementById("searchTable").innerHTML = ""
+        displayTableAttributes("searchTable");
+        document.getElementById("searchTable").innerHTML +=
         "<tr>" +
            "<td>" +response.name +"</td>" +
            "<td>" +response.price +"</td>"+
@@ -38,10 +37,9 @@ function findItem(){
            "<td>" +response.tax +"</td>"
     }
     );
-
 }
-function displayTableAttributes(){
-     document.querySelector("tbody").innerHTML += 
+function displayTableAttributes(tableName){
+    document.getElementById(tableName).innerHTML += 
      "<tr>" + 
             "<td><b>Name</b></td>" +
            "<td><b>Price</b></td>" +
@@ -111,6 +109,12 @@ function addParka(){
    } else {
        alert(name_field + " has successfully been added to the database.");
    }
+   
+    name_field = sanitarizer(name_field);
+    price_field = sanitarizer(price_field);
+    quantity_field = sanitarizer(quantity_field);
+    tax_field = sanitarizer(tax_field);
+    
 let newParka= {name: name_field, price: price_field, quantity: quantity_field, tax: tax_field};
     postData("https://se3316-amali28-lab3-amali28.c9users.io/api/items", newParka, function(response){
     
@@ -138,18 +142,18 @@ if (confirm("Are you sure you would like to delete this item?")){
 
 function retriveData(){
 
-    setInterval(function() {
+   setInterval(function(){
     getParkaData("https://se3316-amali28-lab3-amali28.c9users.io/api/items", function(response){
         
-        document.querySelector("tbody").innerHTML = ""
+        document.getElementById("allTable").innerHTML = "";
         
         let itemNumber = 0;
  
         response.forEach(function(parka){
        
         ++itemNumber;
-        displayTableAttributes();
-        document.querySelector("tbody").innerHTML += "<tr>" + 
+        displayTableAttributes("allTable");
+        document.getElementById("allTable").innerHTML += "<tr>" + 
         "<td id='parka.name" + itemNumber +"' >" +parka.name +"</td>"+
         "<td id='parka.price" + itemNumber +"' >" +parka.price +"</td>"+
         "<td id='parka._id" + itemNumber +"' >" +parka._id +"</td>"+
@@ -161,7 +165,7 @@ function retriveData(){
         })
     }
     );
-    }, 2000);
+   }, 2000);
 }
 
 function putData(url = ``, data = {}, myCallBack) {
